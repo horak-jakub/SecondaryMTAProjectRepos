@@ -13,6 +13,12 @@
         android:theme="@style/Theme.Chess_Endgame"
         tools:targetApi="31">
         <activity
+            android:name=".ChessboardActivity"
+            android:exported="false" />
+        <activity
+            android:name=".BoardSettingActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

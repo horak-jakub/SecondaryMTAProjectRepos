@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Chess_Endgame</string>
+    <string name="chess_endgame">Chess Endgame!</string>
+    <string name="new_game">New Game</string>
+    <string name="rook_game">Rook Game</string>
+    <string name="two_bishops_game">Two Bishops Game</string>
+    <string name="queen_game">Queen Game</string>
 </resources>
