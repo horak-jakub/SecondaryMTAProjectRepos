@@ -1,5 +1,6 @@
 package com.example.chess_endgame
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.chess_endgame.databinding.ActivityBoardSettingBinding
@@ -11,5 +12,9 @@ class BoardSettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityBoardSettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.QGameButton.setOnClickListener {
+            startActivity(Intent(this, ChessboardActivity::class.java))
+        }
     }
 }
