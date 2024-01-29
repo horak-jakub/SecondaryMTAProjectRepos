@@ -9,18 +9,23 @@ fun main() {
 
 class Game {
 
-    var board = Chessboard()
-    val comp = Computer()
-    var b = true
+    //companion object {
+        var board = Chessboard()
+    //}
+
+    private val comp = Computer()
+    private var b = true
+
+    constructor() {
+        board.placePiece(Queen(true, Coordinates('h', '1')))
+        board.placePiece(King(true, Coordinates('e', '1')))
+        board.placePiece(King(false, Coordinates('e', '5')))
+    }
 
     fun run() {
         //board.placePiece(Bishop(true, Coordinates('d', '7')))
         //board.placePiece(Bishop(true, Coordinates('e', '1')))
-        board.placePiece(Knight(true, Coordinates('a', '7')))
-        board.placePiece(Bishop(true, Coordinates('h', '2')))
-        board.placePiece(Bishop(true, Coordinates('h', '1')))
-        board.placePiece(King(true, Coordinates('e', '1')))
-        board.placePiece(King(false, Coordinates('d', '5')))
+
         var command = ""
         do {
             if (b) {
@@ -60,5 +65,9 @@ class Game {
             return true
         }
         return false
+    }
+
+    fun computeMove() {
+        board = comp.minMax(board).first
     }
 }

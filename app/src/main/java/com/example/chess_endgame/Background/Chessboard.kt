@@ -10,7 +10,7 @@ class Chessboard {
     val whiteControl = Array<Boolean>(64) { false }
     var pieces = mutableListOf<Piece>()
     var blackKing = King(false, Coordinates(0, 7))
-    var whiteOnTurn : Boolean = true
+    var whiteOnTurn : Boolean = false
 
     constructor() {
     }

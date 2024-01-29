@@ -1,7 +1,7 @@
 package com.example.chess_endgame.Background
 
 const val maximum = 10000
-val depth = 7
+val depth = 4
 val kingPosEval = listOf<Int>(100, 95, 85, 70, 95, 80, 60, 40, 85, 60, 10, 0, 70, 40, 0, -20)
 
 class Computer {

@@ -1,30 +1,47 @@
 package com.example.chess_endgame
 
-import android.icu.number.IntegerWidth
-import android.media.Image
+import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageView
+import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.chess.console.Game
-import com.example.chess_endgame.Background.Chessboard
-import com.example.chess_endgame.Background.Computer
-import com.example.chess_endgame.databinding.ActivityBoardSettingBinding
 import com.example.chess_endgame.databinding.ActivityChessboardBinding
 
 class ChessboardActivity : AppCompatActivity() {
     private lateinit var binding : ActivityChessboardBinding
 
     val game : Game = Game()
-    val blackKing = ImageView(this)
-    val pieces = (mutableListOf <ImageView>())
+    lateinit var blackKing : ImageView
+    val pieces = mutableListOf <ImageView>()
+    val piecesSymbols = mutableListOf<Char>()
+    val squareSize = (50 * Resources.getSystem().displayMetrics.density).toFloat()
+
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
         super.onCreate(savedInstanceState)
         binding = ActivityChessboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        createImages()
+        val layout = findViewById<ConstraintLayout>(R.id.piecesLayout)
+        blackKing = ImageView(this)
+        blackKing.setImageResource(R.drawable.black_king)
+        blackKing.x = squareSize * (game.board.blackKing.coordinates.file)
+        blackKing.y = squareSize * (7 - game.board.blackKing.coordinates.row)
+        layout.addView(blackKing)
+
+        for (i in 0..this.game.board.pieces.size - 1) {
+            pieces.add(ImageView(this))
+            pieces[i].setImageResource(game.board.pieces[i].getRepresentaniton())
+            piecesSymbols.add(game.board.pieces[i].getSymbol())
+            layout.addView(pieces[i])
+        }
+
+        setWhitePositions()
+
 
         binding.button01.setOnClickListener() {
             executeMove(0, 1)
@@ -51,11 +68,25 @@ class ChessboardActivity : AppCompatActivity() {
 
     fun executeMove(file : Int, row : Int) {
         if (game.move(file, row)) {
-            blackKing.setImageResource(R.drawable.chess_kdt45)
+            blackKing.x += squareSize * file
+            blackKing.y -= squareSize * row
+
+            game.computeMove()
+            setWhitePositions()
         }
     }
 
-    fun createImages() {
+    fun setWhitePositions() {
 
+        val layout = findViewById<ConstraintLayout>(R.id.piecesLayout)
+
+        for (piece in this.game.board.pieces) {
+            for (i in 0..pieces.size - 1) {
+                if (piece.getSymbol() == piecesSymbols[i]) {
+                    pieces[i].x = squareSize * (piece.coordinates.file)
+                    pieces[i].y = squareSize * (7 - piece.coordinates.row)
+                }
+            }
+        }
     }
 }
