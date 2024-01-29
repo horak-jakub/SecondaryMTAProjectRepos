@@ -5,4 +5,11 @@
     <string name="rook_game">Rook Game</string>
     <string name="two_bishops_game">Two Bishops Game</string>
     <string name="queen_game">Queen Game</string>
+    <string name="queen_and_bishop">Queen and Bishop</string>
+    <string name="two_knights_and_bishop">Two Knights and Bishop</string>
+    <string name="two_queens">Two Queens</string>
+    <string name="two_rooks">Two Rooks</string>
+    <string name="two_bishops">Two Bishops</string>
+    <string name="rook">Rook</string>
+    <string name="queen">Queen</string>
 </resources>

@@ -9,18 +9,61 @@ fun main() {
 
 class Game {
 
-    //companion object {
+    companion object {
         var board = Chessboard()
-    //}
+
+        fun createQChessboard() {
+            board.placePiece(Queen(true, Coordinates('h', '1')))
+            board.placePiece(King(true, Coordinates('a', '1')))
+            board.placePiece(King(false, Coordinates('e', '5')))
+        }
+
+        fun createRChessboard() {
+            board.placePiece(Rook(true, Coordinates('h', '1')))
+            board.placePiece(King(true, Coordinates('a', '8')))
+            board.placePiece(King(false, Coordinates('e', '5')))
+        }
+
+        fun createBBChessboard() {
+            board.placePiece(Bishop(true, Coordinates('h', '1')))
+            board.placePiece(Bishop(true, Coordinates('a', '3')))
+            board.placePiece(King(true, Coordinates('g', '2')))
+            board.placePiece(King(false, Coordinates('e', '5')))
+        }
+
+        fun createQQChessboard() {
+            board.placePiece(Queen(true, Coordinates('h', '1')))
+            board.placePiece(Queen(true, Coordinates('h', '2')))
+            board.placePiece(King(true, Coordinates('g', '3')))
+            board.placePiece(King(false, Coordinates('e', '5')))
+        }
+
+        fun createRRChessboard() {
+            board.placePiece(Rook(true, Coordinates('a', '1')))
+            board.placePiece(Rook(true, Coordinates('b', '1')))
+            board.placePiece(King(true, Coordinates('h', '8')))
+            board.placePiece(King(false, Coordinates('e', '5')))
+        }
+
+        fun createNNBChessboard() {
+            board.placePiece(Knight(true, Coordinates('a', '8')))
+            board.placePiece(Knight(true, Coordinates('h', '1')))
+            board.placePiece(Bishop(true, Coordinates('a', '6')))
+            board.placePiece(King(true, Coordinates('e', '1')))
+            board.placePiece(King(false, Coordinates('e', '5')))
+        }
+
+        fun createQBChessboard() {
+            board.placePiece(Bishop(true, Coordinates('h', '1')))
+            board.placePiece(Queen(true, Coordinates('b', '7')))
+            board.placePiece(King(true, Coordinates('g', '2')))
+            board.placePiece(King(false, Coordinates('e', '5')))
+        }
+    }
 
     private val comp = Computer()
     private var b = true
 
-    constructor() {
-        board.placePiece(Queen(true, Coordinates('h', '1')))
-        board.placePiece(King(true, Coordinates('e', '1')))
-        board.placePiece(King(false, Coordinates('e', '5')))
-    }
 
     fun run() {
         //board.placePiece(Bishop(true, Coordinates('d', '7')))
@@ -68,6 +111,8 @@ class Game {
     }
 
     fun computeMove() {
-        board = comp.minMax(board).first
+        var p = comp.minMax(board)
+        board = p.first
+        println(p.second)
     }
 }

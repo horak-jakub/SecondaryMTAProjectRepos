@@ -1,12 +1,16 @@
 package com.example.chess_endgame.Background
 
 const val maximum = 10000
-val depth = 4
+var depth = 0
+val baseDepth = 5
 val kingPosEval = listOf<Int>(100, 95, 85, 70, 95, 80, 60, 40, 85, 60, 10, 0, 70, 40, 0, -20)
 
 class Computer {
 
     fun minMax(board : Chessboard) : Pair<Chessboard, Int> {
+        depth = baseDepth
+        if (evaluatePosition(board) > 60) depth += 2
+        if (evaluatePosition(board) > 80) depth += 1
         var finalBoard : Chessboard = Chessboard()
         var max = -maximum
         var j : Long = 0
@@ -17,6 +21,7 @@ class Computer {
             if (pair.first > max) {
                 finalBoard = it
                 max = pair.first
+                if (max > maximum - 1000) break
             }
         }
 
