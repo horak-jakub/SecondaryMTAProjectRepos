@@ -52,4 +52,13 @@ class Game {
         }
         return false
     }
+
+    fun move(file : Int, row : Int) : Boolean {
+        val b = board.movePiece(board.blackKing, Coordinates(board.blackKing.coordinates.file + file, board.blackKing.coordinates.row + row))
+        if (board != b) {
+            board = b
+            return true
+        }
+        return false
+    }
 }
