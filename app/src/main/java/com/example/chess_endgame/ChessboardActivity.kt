@@ -10,18 +10,21 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.chess.console.Game
 import com.example.chess_endgame.Background.Coordinates
 import com.example.chess_endgame.databinding.ActivityChessboardBinding
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 
 val squareDpSize = 50
 
 class ChessboardActivity : AppCompatActivity() {
     private lateinit var binding : ActivityChessboardBinding
 
-    val game : Game = Game()
+    lateinit var game : Game
     lateinit var blackKing : ImageView
     val pieces = mutableListOf <ImageView>()
     val piecesSymbols = mutableListOf<Char>()
     val squareSize = (squareDpSize * Resources.getSystem().displayMetrics.density)
-
 
 
 
@@ -31,6 +34,8 @@ class ChessboardActivity : AppCompatActivity() {
         binding = ActivityChessboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        game = Game(readSettingsJson())
+
         binding.newGamButton.setOnClickListener() {
             startActivity(Intent(this, BoardSettingActivity::class.java))
         }
@@ -39,14 +44,14 @@ class ChessboardActivity : AppCompatActivity() {
         val layout = findViewById<ConstraintLayout>(R.id.piecesLayout)
         blackKing = ImageView(this)
         blackKing.setImageResource(R.drawable.black_king)
-        blackKing.x = squareSize * (Game.board.blackKing.coordinates.file)
-        blackKing.y = squareSize * (7 - Game.board.blackKing.coordinates.row)
+        blackKing.x = squareSize * (game.board.blackKing.coordinates.file)
+        blackKing.y = squareSize * (7 - game.board.blackKing.coordinates.row)
         layout.addView(blackKing)
 
-        for (i in 0..Game.board.pieces.size - 1) {
+        for (i in 0..game.board.pieces.size - 1) {
             pieces.add(ImageView(this))
-            pieces[i].setImageResource(Game.board.pieces[i].getRepresentaniton())
-            piecesSymbols.add(Game.board.pieces[i].getSymbol())
+            pieces[i].setImageResource(game.board.pieces[i].getRepresentaniton())
+            piecesSymbols.add(game.board.pieces[i].getSymbol())
             layout.addView(pieces[i])
         }
 
@@ -93,7 +98,7 @@ class ChessboardActivity : AppCompatActivity() {
 
         var temp = piecesSymbols.toMutableList()
 
-        for (piece in Game.board.pieces) {
+        for (piece in game.board.pieces) {
             for (i in 0..pieces.size - 1) {
                 if (piece.getSymbol() == piecesSymbols[i]) {
                     pieces[i].x = squareSize * (piece.coordinates.file)
@@ -107,4 +112,25 @@ class ChessboardActivity : AppCompatActivity() {
         piecesSymbols.clear()
         piecesSymbols.addAll(temp)
     }
+
+
+    fun readSettingsJson () : String {
+        var string: String? = ""
+        val stringBuilder = StringBuilder()
+        val inputStream: InputStream = resources.openRawResource(applicationContext.resources.getIdentifier("settings", "raw", applicationContext.packageName))
+        //val inputStream: InputStream = resources.openRawResource(R.raw.settings)
+        val reader = BufferedReader(InputStreamReader(inputStream))
+        while (true) {
+            try {
+                if (reader.readLine().also { string = it } == null) break
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
+            stringBuilder.append(string).append("\n")
+
+        }
+        inputStream.close()
+        return stringBuilder.toString()
+    }
+
 }

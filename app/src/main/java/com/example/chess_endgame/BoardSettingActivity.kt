@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.chess.console.Game
 import com.example.chess_endgame.databinding.ActivityBoardSettingBinding
+import java.io.BufferedReader
+import java.io.IOException
+import java.io.InputStream
+import java.io.InputStreamReader
 
 
 class BoardSettingActivity : AppCompatActivity() {
@@ -50,4 +54,7 @@ class BoardSettingActivity : AppCompatActivity() {
         }
 
     }
+
+
+
 }
