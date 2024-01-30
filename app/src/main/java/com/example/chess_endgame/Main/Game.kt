@@ -102,7 +102,7 @@ class Game {
     }
 
     fun move(file : Int, row : Int) : Boolean {
-        val b = board.movePiece(board.blackKing, Coordinates(board.blackKing.coordinates.file + file, board.blackKing.coordinates.row + row))
+        val b = board.movePiece(board.blackKing, Coordinates(file, row))
         if (board != b) {
             board = b
             return true
@@ -110,9 +110,10 @@ class Game {
         return false
     }
 
-    fun computeMove() {
+    fun computeMove() : Boolean {
         var p = comp.minMax(board)
         board = p.first
         println(p.second)
+        return board.generateMoves().size != 0
     }
 }

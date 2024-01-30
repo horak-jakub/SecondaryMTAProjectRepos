@@ -1,12 +1,17 @@
 package com.example.chess_endgame
 
+import android.content.Intent
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.chess.console.Game
+import com.example.chess_endgame.Background.Coordinates
 import com.example.chess_endgame.databinding.ActivityChessboardBinding
+
+val squareDpSize = 50
 
 class ChessboardActivity : AppCompatActivity() {
     private lateinit var binding : ActivityChessboardBinding
@@ -15,7 +20,7 @@ class ChessboardActivity : AppCompatActivity() {
     lateinit var blackKing : ImageView
     val pieces = mutableListOf <ImageView>()
     val piecesSymbols = mutableListOf<Char>()
-    val squareSize = (50 * Resources.getSystem().displayMetrics.density).toFloat()
+    val squareSize = (squareDpSize * Resources.getSystem().displayMetrics.density)
 
 
 
@@ -25,6 +30,11 @@ class ChessboardActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityChessboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        binding.newGamButton.setOnClickListener() {
+            startActivity(Intent(this, BoardSettingActivity::class.java))
+        }
+        binding.mateLayout.x = -1000f
 
         val layout = findViewById<ConstraintLayout>(R.id.piecesLayout)
         blackKing = ImageView(this)
@@ -43,41 +53,39 @@ class ChessboardActivity : AppCompatActivity() {
         setWhitePositions()
 
 
-        binding.button01.setOnClickListener() {
-            executeMove(0, 1)
+        binding.piecesLayout.setOnTouchListener { v, event ->
+            val action = event.action
+            when (action) {
+
+                MotionEvent.ACTION_DOWN -> {
+                    processClick(
+                        event.x.toInt() / Resources.getSystem().displayMetrics.density,
+                        event.y.toInt() / Resources.getSystem().displayMetrics.density)
+                }
+
+                else -> { }
+            }
+            true
         }
-        binding.button0Neg1.setOnClickListener() {
-            executeMove(0, -1)
-        }
-        binding.button10.setOnClickListener() {
-            executeMove(1, 0)
-        }
-        binding.button11.setOnClickListener() {
-            executeMove(1, 1)
-        }
-        binding.button1Neg1.setOnClickListener() {
-            executeMove(1, -1)
-        }
-        binding.buttonNeg10.setOnClickListener() {
-            executeMove(-1,0)
-        }
-        binding.buttonNeg1Neg1.setOnClickListener() {
-            executeMove(-1, -1)
-        }
-        binding.buttonNeg11.setOnClickListener() {
-            executeMove(-1, 1)
-        }
+
     }
 
-    fun executeMove(file : Int, row : Int) {
+    fun processClick(x : Float, y : Float) {
+        val file = (x / squareDpSize).toInt()
+        val row = Coordinates.count - (y / squareDpSize).toInt() - 1
+
         if (game.move(file, row)) {
-            blackKing.x += squareSize * file
-            blackKing.y -= squareSize * row
+            blackKing.x = file.toFloat() * squareSize
+            blackKing.y = (Coordinates.count - 1 - row.toFloat()) * squareSize
 
-            game.computeMove()
+            var b = game.computeMove()
             setWhitePositions()
+            if (!b) {
+                binding.mateLayout.x = 0f
+            }
         }
     }
+
 
     fun setWhitePositions() {
 

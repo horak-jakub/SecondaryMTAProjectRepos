@@ -8,102 +8,6 @@
     android:background="#FFFFFF"
     tools:context=".ChessboardActivity">
 
-    <Button
-        android:id="@+id/button_0_1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="0;1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
-
-    <Button
-        android:id="@+id/button_neg1_0"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="-1;0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.355"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_neg1_1"
-        app:layout_constraintVertical_bias="0.166" />
-
-    <Button
-        android:id="@+id/button_neg1_neg1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="-1;-1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.355"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_neg1_0"
-        app:layout_constraintVertical_bias="0.733" />
-
-    <Button
-        android:id="@+id/button_1_0"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="1;0"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.641"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_1_1"
-        app:layout_constraintVertical_bias="0.166" />
-
-    <Button
-        android:id="@+id/button_1_neg1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:text="1;-1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.641"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button_1_0"
-        app:layout_constraintVertical_bias="0.428" />
-
-    <Button
-        android:id="@+id/button_0_neg1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="0;-1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_1_neg1"
-        app:layout_constraintStart_toEndOf="@+id/button_neg1_neg1"
-        app:layout_constraintTop_toBottomOf="@+id/button_0_1"
-        app:layout_constraintVertical_bias="0.939" />
-
-    <Button
-        android:id="@+id/button_1_1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="1;1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.089"
-        app:layout_constraintStart_toEndOf="@+id/button_0_1"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
-
-    <Button
-        android:id="@+id/button_neg1_1"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:text="-1;1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/button_0_1"
-        app:layout_constraintHorizontal_bias="0.91"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.846" />
-
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="400dp"
         android:layout_height="400dp"
@@ -450,6 +354,40 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mateLayout"
+        android:layout_width="164dp"
+        android:layout_height="151dp"
+        tools:layout_editor_absoluteX="6dp"
+        tools:layout_editor_absoluteY="7dp">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="142dp"
+            android:layout_height="53dp"
+            android:text="CHECK MATE"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.29" />
+
+        <Button
+            android:id="@+id/new_gam_button"
+            android:layout_width="122dp"
+            android:layout_height="49dp"
+            android:text="New Game"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.612" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
