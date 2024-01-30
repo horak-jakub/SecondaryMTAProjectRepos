@@ -37,7 +37,7 @@ class ChessboardActivity : AppCompatActivity() {
         game = Game(readSettingsJson())
 
         binding.newGamButton.setOnClickListener() {
-            startActivity(Intent(this, BoardSettingActivity::class.java))
+            startActivity(Intent(this, ScoreActivity::class.java))
         }
         binding.mateLayout.x = -1000f
 
