@@ -7,21 +7,31 @@ val kingPosEval = listOf<Int>(100, 95, 85, 70, 95, 80, 60, 40, 85, 60, 10, 0, 70
 
 class Computer {
 
+    var repeatedMoves = mutableListOf<Array<Char>>()
+
     fun minMax(board : Chessboard) : Pair<Chessboard, Int> {
         depth = baseDepth
         if (evaluatePosition(board) > 60) depth += 2
         if (evaluatePosition(board) > 80) depth += 1
         var finalBoard : Chessboard = Chessboard()
+
         var max = -maximum
         var j : Long = 0
+
+        repeatedMoves.add(board.generateMoves()[0].board)
 
         for (it in board.generateMoves()) {
             var pair = minMax(it, 1, max)
             j += pair.second
             if (pair.first > max) {
-                finalBoard = it
-                max = pair.first
-                if (max > maximum - 1000) break
+                var b = true
+                for (r in repeatedMoves) {
+                    if (r.contentEquals(it.board)) b = false
+                }
+                if (b) {
+                    finalBoard = it
+                    max = pair.first
+                }
             }
         }
 
@@ -88,25 +98,27 @@ class Computer {
         return Pair(evaluatePosition(board) - i, 1)
     }
 
+    companion object {
+        fun evaluatePosition(board : Chessboard) : Int {
 
-    fun evaluatePosition(board : Chessboard) : Int {
+            var whiteKingCoord = Coordinates(0,0)
+            board.pieces.forEach() {
+                if (it is King) whiteKingCoord = it.coordinates
+            }
+            var a = (whiteKingCoord.getDistance(board.blackKing.coordinates) - 1) * 2
+            a = -a * a
+            a += getKingPosEvaluation(board.blackKing)
 
-        var whiteKingCoord = Coordinates(0,0)
-        board.pieces.forEach() {
-            if (it is King) whiteKingCoord = it.coordinates
+            return a
         }
-        var a = (whiteKingCoord.getDistance(board.blackKing.coordinates) - 1) * 2
-        a = -a * a
-        a += getKingPosEvaluation(board.blackKing)
 
-        return a
+        fun getKingPosEvaluation(king : King) : Int {
+            var file = king.coordinates.file
+            var row = king.coordinates.row
+            if (file >= Coordinates.count / 2) file = Coordinates.count - 1 - file
+            if (row >= Coordinates.count / 2) row = Coordinates.count - 1 - row
+            return kingPosEval[row * Coordinates.count / 2 + file]
+        }
     }
 
-    fun getKingPosEvaluation(king : King) : Int {
-        var file = king.coordinates.file
-        var row = king.coordinates.row
-        if (file >= Coordinates.count / 2) file = Coordinates.count - 1 - file
-        if (row >= Coordinates.count / 2) row = Coordinates.count - 1 - row
-        return kingPosEval[row * Coordinates.count / 2 + file]
-    }
 }

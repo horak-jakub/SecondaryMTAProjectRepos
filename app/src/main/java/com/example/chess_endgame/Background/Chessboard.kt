@@ -108,10 +108,19 @@ class Chessboard {
 
         var list = mutableListOf<Chessboard>()
 
+        val tempPieces = pieces.toMutableList()
         if (whiteOnTurn) {
-            for (p in pieces) {
+            for (p in tempPieces) {
+                if (p is King) {
+                    list.addAll(generatePieceMoves(p))
+                    tempPieces.remove(p)
+                    break
+                }
+            }
+            for (p in tempPieces) {
                 list.addAll(generatePieceMoves(p))
             }
+
         }
         else list.addAll(generatePieceMoves(blackKing))
 
@@ -146,6 +155,7 @@ class Chessboard {
     fun generatePieceMoves(p : Piece) : MutableList<Chessboard> {
 
         var list = mutableListOf<Chessboard>()
+        var kingList = mutableListOf<Chessboard>()
 
         for (it in p.getMovementList()) {
             var file = p.coordinates.file + it.first
@@ -162,10 +172,10 @@ class Chessboard {
             }
             else if (file < Coordinates.count && row < Coordinates.count && file >= 0 && row >= 0 && (board[row * Coordinates.count + file] == emptySquare || !p.isSameColor(board[row * Coordinates.count + file]))) {
                 if (p is King) {
-                    if (p.white && Coordinates(file, row).getDistance(blackKing.coordinates) > 1) list.add(
+                    if (p.white && Coordinates(file, row).getDistance(blackKing.coordinates) > 1) kingList.add(
                         Chessboard(this, p, p.getNewPiece(Coordinates(file, row)))
                     )
-                    else if (!p.white && !whiteControl[row * Coordinates.count + file]) list.add(
+                    else if (!p.white && !whiteControl[row * Coordinates.count + file]) kingList.add(
                         Chessboard(this, p, p.getNewPiece(Coordinates(file, row)))
                     )
                 }
@@ -174,6 +184,40 @@ class Chessboard {
                 }
             }
         }
+
+        if (p is King) {
+            if (p.white) {
+                while(kingList.size > 0) {
+                    var m = -maximum
+                    var ch : Chessboard = kingList[0]
+                    for(it in kingList) {
+                        val e = Computer.evaluatePosition(it)
+                        if (e >= m) {
+                            ch = it
+                            m = e
+                        }
+                    }
+                    list.add(ch)
+                    kingList.remove(ch)
+                }
+            }
+            else {
+                while(kingList.size > 0) {
+                    var m = maximum
+                    var ch : Chessboard = kingList[0]
+                    for(it in kingList) {
+                        val e = Computer.evaluatePosition(it)
+                        if (e <= m) {
+                            ch = it
+                            m = e
+                        }
+                    }
+                    list.add(ch)
+                    kingList.remove(ch)
+                }
+            }
+        }
+
         return list
     }
 

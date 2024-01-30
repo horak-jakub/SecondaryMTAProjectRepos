@@ -13,9 +13,9 @@ class Game {
         var board = Chessboard()
 
         fun createQChessboard() {
-            board.placePiece(Queen(true, Coordinates('h', '1')))
-            board.placePiece(King(true, Coordinates('a', '1')))
-            board.placePiece(King(false, Coordinates('e', '5')))
+            board.placePiece(Queen(true, Coordinates('a', '1')))
+            board.placePiece(King(true, Coordinates('h', '8')))
+            board.placePiece(King(false, Coordinates('e', '4')))
         }
 
         fun createRChessboard() {
@@ -25,8 +25,8 @@ class Game {
         }
 
         fun createBBChessboard() {
-            board.placePiece(Bishop(true, Coordinates('h', '1')))
             board.placePiece(Bishop(true, Coordinates('a', '3')))
+            board.placePiece(Bishop(true, Coordinates('h', '1')))
             board.placePiece(King(true, Coordinates('g', '2')))
             board.placePiece(King(false, Coordinates('e', '5')))
         }
