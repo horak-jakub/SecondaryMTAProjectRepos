@@ -1,0 +1,177 @@
+{
+  "games" : [
+    {
+      "name" : "Q_game",
+      "pieces" : [
+        {
+          "symbol" : "k",
+          "file" : "e",
+          "row" : "4"
+        },
+        {
+          "symbol" : "K",
+          "file" : "h",
+          "row" : "8"
+        },
+        {
+          "symbol" : "Q",
+          "file" : "a",
+          "row" : "1"
+        }
+      ]
+    },
+    {
+      "name" : "R_game",
+      "pieces" : [
+        {
+          "symbol" : "k",
+          "file" : "e",
+          "row" : "5"
+        },
+        {
+          "symbol" : "K",
+          "row" : "a",
+          "file" : "8"
+        },
+        {
+          "symbol" : "R",
+          "file" : "h",
+          "row" : "1"
+        }
+      ]
+    },
+    {
+      "name" : "RR_game",
+      "pieces" : [
+        {
+          "symbol" : "k",
+          "file" : "e",
+          "row" : "5"
+        },
+        {
+          "symbol" : "K",
+          "file" : "h",
+          "row" : "8"
+        },
+        {
+          "symbol" : "R",
+          "file" : "a",
+          "row" : "1"
+        },
+        {
+          "symbol" : "R",
+          "file" : "b",
+          "row" : "1"
+        }
+      ]
+    },
+    {
+      "name" : "QQ_game",
+      "pieces" : [
+        {
+          "symbol" : "k",
+          "file" : "e",
+          "row" : "5"
+        },
+        {
+          "symbol" : "K",
+          "file" : "g",
+          "row" : "3"
+        },
+        {
+          "symbol" : "Q",
+          "file" : "h",
+          "row" : "1"
+        },
+        {
+          "symbol" : "Q",
+          "file" : "h",
+          "row" : "2"
+        }
+      ]
+    },
+    {
+      "name" : "BB_game",
+      "pieces" : [
+        {
+          "symbol" : "k",
+          "file" : "e",
+          "row" : "5"
+        },
+        {
+          "symbol" : "K",
+          "file" : "g",
+          "row" : "2"
+        },
+        {
+          "symbol" : "B",
+          "file" : "a",
+          "row" : "3"
+        },
+        {
+          "symbol" : "B",
+          "file" : "h",
+          "row" : "1"
+        }
+      ]
+    },
+    {
+      "name" : "QB_game",
+      "pieces" : [
+        {
+          "symbol" : "k",
+          "file" : "e",
+          "row" : "5"
+        },
+        {
+          "symbol" : "K",
+          "file" : "g",
+          "row" : "2"
+        },
+        {
+          "symbol" : "Q",
+          "file" : "b",
+          "row" : "7"
+        },
+        {
+          "symbol" : "B",
+          "file" : "b",
+          "row" : "7"
+        }
+      ]
+    },
+    {
+      "name" : "NNB_game",
+      "pieces" : [
+        {
+          "symbol" : "k",
+          "file" : "e",
+          "row" : "5"
+        },
+        {
+          "symbol" : "K",
+          "file" : "e",
+          "row" : "1"
+        },
+        {
+          "symbol" : "N",
+          "file" : "a",
+          "row" : "8"
+        },
+        {
+          "symbol" : "N",
+          "file" : "h",
+          "row" : "1"
+        },
+        {
+          "symbol" : "B",
+          "file" : "a",
+          "row" : "6"
+        }
+      ]
+    }
+  ]
+}
+
+
+
