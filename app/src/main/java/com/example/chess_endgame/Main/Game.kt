@@ -1,5 +1,6 @@
 package com.example.chess.console
 
+import androidx.lifecycle.ViewModel
 import com.example.chess_endgame.Background.*
 import com.example.chess_endgame.Score.Score
 import com.example.chess_endgame.Score.ScoreDao
@@ -18,63 +19,36 @@ fun main() {
     //Game().run()
 }
 
-class Game(jsonSettings : String, scoreDao: ScoreDao) {
+class Game(jsonSettings : String, scoreDao: ScoreDao) : ViewModel() {
 
     companion object {
         private var gameId : String = ""
 
         fun createQChessboard() {
-            //board.placePiece(Queen(true, Coordinates('a', '1')))
-            //board.placePiece(King(true, Coordinates('h', '8')))
-            //board.placePiece(King(false, Coordinates('e', '4')))
             gameId = "Q_game"
         }
 
         fun createRChessboard() {
-            //board.placePiece(Rook(true, Coordinates('h', '1')))
-            //board.placePiece(King(true, Coordinates('a', '8')))
-            //board.placePiece(King(false, Coordinates('e', '5')))
             gameId = "R_game"
         }
 
         fun createBBChessboard() {
-            //board.placePiece(Bishop(true, Coordinates('a', '3')))
-            //board.placePiece(Bishop(true, Coordinates('h', '1')))
-            //board.placePiece(King(true, Coordinates('g', '2')))
-            //board.placePiece(King(false, Coordinates('e', '5')))
             gameId = "BB_game"
         }
 
         fun createQQChessboard() {
-            //board.placePiece(Queen(true, Coordinates('h', '1')))
-            //board.placePiece(Queen(true, Coordinates('h', '2')))
-            //board.placePiece(King(true, Coordinates('g', '3')))
-            //board.placePiece(King(false, Coordinates('e', '5')))
             gameId = "QQ_game"
         }
 
         fun createRRChessboard() {
-            //board.placePiece(Rook(true, Coordinates('a', '1')))
-            //board.placePiece(Rook(true, Coordinates('b', '1')))
-            //board.placePiece(King(true, Coordinates('h', '8')))
-            //board.placePiece(King(false, Coordinates('e', '5')))
             gameId = "RR_game"
         }
 
         fun createNNBChessboard() {
-            //board.placePiece(Knight(true, Coordinates('a', '8')))
-            //board.placePiece(Knight(true, Coordinates('h', '1')))
-            //board.placePiece(Bishop(true, Coordinates('a', '6')))
-            //board.placePiece(King(true, Coordinates('e', '1')))
-            //board.placePiece(King(false, Coordinates('e', '5')))
             gameId = "NNB_game"
         }
 
         fun createQBChessboard() {
-            //board.placePiece(Bishop(true, Coordinates('h', '1')))
-            //board.placePiece(Queen(true, Coordinates('b', '7')))
-            //board.placePiece(King(true, Coordinates('g', '2')))
-            //board.placePiece(King(false, Coordinates('e', '5')))
             gameId = "QB_game"
         }
     }

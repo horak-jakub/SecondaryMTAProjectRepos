@@ -7,8 +7,10 @@ import android.os.Bundle
 import android.view.MotionEvent
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.lifecycle.ViewModelProvider
 import com.example.chess.console.Game
 import com.example.chess_endgame.Background.Coordinates
+import com.example.chess_endgame.Main.GameFactory
 import com.example.chess_endgame.Score.ScoreDatabase
 import com.example.chess_endgame.databinding.ActivityChessboardBinding
 import java.io.BufferedReader
@@ -21,8 +23,8 @@ val squareDpSize = 50
 class ChessboardActivity : AppCompatActivity() {
     private lateinit var binding : ActivityChessboardBinding
 
-    lateinit var game : Game
-    lateinit var blackKing : ImageView
+    private lateinit var game: Game
+    private lateinit var blackKing : ImageView
     val pieces = mutableListOf <ImageView>()
     val piecesSymbols = mutableListOf<Char>()
     val squareSize = (squareDpSize * Resources.getSystem().displayMetrics.density)
@@ -37,7 +39,8 @@ class ChessboardActivity : AppCompatActivity() {
         binding = ActivityChessboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        game = Game(readSettingsJson(), scoreDao)
+        val factory = GameFactory(readSettingsJson(), scoreDao)
+        game = ViewModelProvider(this, factory).get(Game::class.java)
 
         binding.newGamButton.setOnClickListener() {
             startActivity(Intent(this, ScoreActivity::class.java))
