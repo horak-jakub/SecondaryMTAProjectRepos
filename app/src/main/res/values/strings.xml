@@ -15,4 +15,11 @@
     <string name="_0_1">0;1</string>
     <string name="_1_1">-1;-1</string>
     <string name="_1_0">1;0</string>
+    <string name="back">Back</string>
+    <string name="check_mate">CHECK MATE</string>
+    <string name="records">Records</string>
+    <string name="recordss">Recordss</string>
+    <string name="board">BOARD</string>
+    <string name="moves">MOVES</string>
+    <string name="textview">TextView</string>
 </resources>
