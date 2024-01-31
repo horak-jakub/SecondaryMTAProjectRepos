@@ -11,8 +11,6 @@ import java.util.Date
     indices = arrayOf(
         Index(value = arrayOf ("score"), unique = false),
         Index(value = arrayOf("name", "score")))
-    // primaryKeys = arrayOf ("id", "dateAdded"),
-    // ignoredColumns = arrayOf ("ignore", "test")
 )
 data class Score (
     @PrimaryKey(autoGenerate = true) val id : Int = 0,

@@ -123,7 +123,7 @@ class Game(jsonSettings : String, scoreDao: ScoreDao) : ViewModel() {
 
         if (board.generateMoves().size == 0) {
             GlobalScope.launch {
-                scoreDao.addScore(Score(0, Date(), gameId, moveCount))
+                scoreDao.addScore(Score(0, Date(), board.toString(), moveCount))
             }
             return false
         }

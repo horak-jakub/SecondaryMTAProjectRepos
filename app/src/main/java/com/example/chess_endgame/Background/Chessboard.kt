@@ -82,24 +82,18 @@ class Chessboard {
 
         var s : String = ""
 
-        for (i in 7 downTo 0) {
-            s += (i + 1).toString() + "  "
-            for (j in 0..7) {
-                if (whiteControl[i * 8 + j]) s += "1  "
-                else s += "0  "
-            }
-            s += "\n"
-        }
-        s += "   a  b  c  d  e  f  g  h\n\n"
+        for (i in Coordinates.count - 1 downTo 0) {
+            for (j in 0..<Coordinates.count) {
+                if (board[i * Coordinates.count + j] == '.') {
+                    s += board[i * Coordinates.count + j] + "   "
+                }
+                else {
+                    s += board[i * Coordinates.count + j] + "  "
+                }
 
-        for (i in 7 downTo 0) {
-            s += (i + 1).toString() + "  "
-            for (j in 0..7) {
-                s += board[i * 8 + j] + "  "
             }
             s += "\n"
         }
-        s += "   a  b  c  d  e  f  g  h"
         return s
     }
 

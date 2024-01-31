@@ -11,14 +11,17 @@ class Computer {
 
     fun minMax(board : Chessboard) : Pair<Chessboard, Int> {
         depth = baseDepth
-        if (evaluatePosition(board) > 60) depth += 1
+        if (evaluatePosition(board) > 60) depth += 2
+        board.pieces.forEach {
+            if (it is Queen) {
+                depth--
+            }
+        }
         //if (evaluatePosition(board) > 80) depth += 1
         var finalBoard : Chessboard = Chessboard()
 
         var max = -maximum
         var j : Long = 0
-
-        repeatedMoves.add(board.generateMoves()[0].board)
 
         for (it in board.generateMoves()) {
             var pair = minMax(it, 1, max)
@@ -35,6 +38,7 @@ class Computer {
             }
         }
 
+        repeatedMoves.add(finalBoard.board)
         println("\n\n\nITERATIONS: $j")
 
         return Pair(finalBoard, max)
