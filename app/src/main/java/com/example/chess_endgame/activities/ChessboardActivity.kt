@@ -20,7 +20,7 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 
-const val squareDpSize = 50
+const val squareDpSize = 48
 
 class ChessboardActivity : AppCompatActivity() {
     private lateinit var binding : ActivityChessboardBinding

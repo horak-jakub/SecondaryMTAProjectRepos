@@ -13,27 +13,31 @@
         android:text="@string/new_game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.367" />
+        app:layout_constraintVertical_bias="0.559" />
 
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="117dp"
         android:layout_height="113dp"
-        android:layout_marginTop="72dp"
+        app:layout_constraintBottom_toTopOf="@+id/newGameButton"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.481"
         app:srcCompat="@drawable/black_king" />
 
     <Button
         android:id="@+id/score_button"
         android:layout_width="121dp"
         android:layout_height="58dp"
-        android:layout_marginTop="14dp"
+        android:layout_marginTop="52dp"
         android:text="Records"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newGameButton" />
 
