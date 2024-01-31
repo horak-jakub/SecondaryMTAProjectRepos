@@ -379,14 +379,13 @@
         <Button
             android:id="@+id/new_gam_button"
             android:layout_width="122dp"
-            android:layout_height="49dp"
-            android:text="New Game"
+            android:layout_height="67dp"
+            android:text="Show Score"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.612" />
+            app:layout_constraintVertical_bias="0.702" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

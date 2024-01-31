@@ -1,18 +1,24 @@
 package com.example.chess.console
 
 import com.example.chess_endgame.Background.*
+import com.example.chess_endgame.Score.Score
+import com.example.chess_endgame.Score.ScoreDao
+import com.example.chess_endgame.Score.ScoreDatabase
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
+import java.util.Date
 
 
 fun main() {
     //Game().run()
 }
 
-class Game(jsonSettings : String) {
+class Game(jsonSettings : String, scoreDao: ScoreDao) {
 
     companion object {
         private var gameId : String = ""
@@ -77,12 +83,15 @@ class Game(jsonSettings : String) {
     private var b = true
     private var settings : Settings
     var board : Chessboard
+    val scoreDao : ScoreDao
+    var moveCount = 0
 
     init {
         board = Chessboard()
         comp = Computer()
         settings = Settings(jsonSettings, gameId)
         generatePieces(settings.pieces)
+        this.scoreDao = scoreDao
     }
 
 
@@ -133,9 +142,18 @@ class Game(jsonSettings : String) {
 
     fun computeMove() : Boolean {
         var p = comp.minMax(board)
+        moveCount++
         board = p.first
         println(p.second)
-        return board.generateMoves().size != 0
+
+
+        if (board.generateMoves().size == 0) {
+            GlobalScope.launch {
+                scoreDao.addScore(Score(0, Date(), gameId, moveCount))
+            }
+            return false
+        }
+        return true
     }
 
     fun generatePieces(pieces: JSONArray?) {
@@ -170,3 +188,4 @@ class Game(jsonSettings : String) {
     }
 
 }
+

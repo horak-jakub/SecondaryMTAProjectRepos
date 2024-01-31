@@ -9,6 +9,7 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.example.chess.console.Game
 import com.example.chess_endgame.Background.Coordinates
+import com.example.chess_endgame.Score.ScoreDatabase
 import com.example.chess_endgame.databinding.ActivityChessboardBinding
 import java.io.BufferedReader
 import java.io.IOException
@@ -26,6 +27,8 @@ class ChessboardActivity : AppCompatActivity() {
     val piecesSymbols = mutableListOf<Char>()
     val squareSize = (squareDpSize * Resources.getSystem().displayMetrics.density)
 
+    private val scoreDao by lazy { ScoreDatabase.getDatabase(this).scoreDao() }
+
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,7 +37,7 @@ class ChessboardActivity : AppCompatActivity() {
         binding = ActivityChessboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        game = Game(readSettingsJson())
+        game = Game(readSettingsJson(), scoreDao)
 
         binding.newGamButton.setOnClickListener() {
             startActivity(Intent(this, ScoreActivity::class.java))

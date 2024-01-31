@@ -18,13 +18,13 @@ class MainActivity : AppCompatActivity() {
         //val img = findViewById<ImageView>(R.id.imageView2)
         //img.setImageResource(R.drawable.chess_kdt45)
 
-        //binding.newGameButton.setOnClickListener {
-        //    startActivity(Intent(this, BoardSettingActivity::class.java))
-        //}
-
         binding.newGameButton.setOnClickListener {
-            startActivity(Intent(this, ScoreActivity::class.java))
+            startActivity(Intent(this, BoardSettingActivity::class.java))
         }
+
+        //binding.newGameButton.setOnClickListener {
+        //    startActivity(Intent(this, ScoreActivity::class.java))
+        //}
     }
 
 
