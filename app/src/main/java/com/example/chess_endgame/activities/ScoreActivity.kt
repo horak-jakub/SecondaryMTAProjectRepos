@@ -26,12 +26,12 @@ class ScoreActivity : AppCompatActivity() {
         val scoreAdapter = ScoreAdapter()
         binding.scoreRecyclerView.adapter = scoreAdapter
         lifecycle.coroutineScope.launch {
-            scoreDao.getAllScores().collect() {
+            scoreDao.getAllScores().collect {
                 scoreAdapter.submitList(it)
             }
         }
 
-        binding.newGameButton.setOnClickListener() {
+        binding.newGameButton.setOnClickListener {
             finish()
             startActivity(Intent(this, BoardSettingActivity::class.java))
         }

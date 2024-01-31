@@ -1,5 +1,6 @@
 package com.example.chess_endgame.activities
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.res.Resources
 import androidx.appcompat.app.AppCompatActivity
@@ -19,21 +20,22 @@ import java.io.IOException
 import java.io.InputStream
 import java.io.InputStreamReader
 
-val squareDpSize = 50
+const val squareDpSize = 50
 
 class ChessboardActivity : AppCompatActivity() {
     private lateinit var binding : ActivityChessboardBinding
 
     private lateinit var game: Game
     private lateinit var blackKing : ImageView
-    val pieces = mutableListOf <ImageView>()
-    val piecesSymbols = mutableListOf<Char>()
-    val squareSize = (squareDpSize * Resources.getSystem().displayMetrics.density)
+    private val pieces = mutableListOf <ImageView>()
+    private val piecesSymbols = mutableListOf<Char>()
+    private val squareSize = (squareDpSize * Resources.getSystem().displayMetrics.density)
 
     private val scoreDao by lazy { ScoreDatabase.getDatabase(this).scoreDao() }
 
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
 
         super.onCreate(savedInstanceState)
@@ -41,14 +43,14 @@ class ChessboardActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         val factory = GameFactory(readSettingsJson(), scoreDao)
-        game = ViewModelProvider(this, factory).get(Game::class.java)
+        game = ViewModelProvider(this, factory)[Game::class.java]
 
-        binding.recordsButton.setOnClickListener() {
+        binding.recordsButton.setOnClickListener {
             finish()
             startActivity(Intent(this, ScoreActivity::class.java))
         }
 
-        binding.newGameButton.setOnClickListener() {
+        binding.newGameButton.setOnClickListener {
             finish()
             startActivity(Intent(this, BoardSettingActivity::class.java))
         }
@@ -62,7 +64,7 @@ class ChessboardActivity : AppCompatActivity() {
         blackKing.y = squareSize * (7 - game.board.blackKing.coordinates.row)
         layout.addView(blackKing)
 
-        for (i in 0..game.board.pieces.size - 1) {
+        for (i in 0..<game.board.pieces.size) {
             pieces.add(ImageView(this))
             pieces[i].setImageResource(game.board.pieces[i].getRepresentaniton())
             piecesSymbols.add(game.board.pieces[i].getSymbol())
@@ -73,8 +75,7 @@ class ChessboardActivity : AppCompatActivity() {
 
 
         binding.piecesLayout.setOnTouchListener { v, event ->
-            val action = event.action
-            when (action) {
+            when (event.action) {
 
                 MotionEvent.ACTION_DOWN -> {
                     processClick(
@@ -89,7 +90,7 @@ class ChessboardActivity : AppCompatActivity() {
 
     }
 
-    fun processClick(x : Float, y : Float) {
+    private fun processClick(x : Float, y : Float) {
         val file = (x / squareDpSize).toInt()
         val row = Coordinates.count - (y / squareDpSize).toInt() - 1
 
@@ -97,7 +98,7 @@ class ChessboardActivity : AppCompatActivity() {
             blackKing.x = file.toFloat() * squareSize
             blackKing.y = (Coordinates.count - 1 - row.toFloat()) * squareSize
 
-            var b = game.computeMove()
+            val b = game.computeMove()
             setWhitePositions()
             if (!b) {
                 binding.mateLayout.x = 0f
@@ -106,14 +107,12 @@ class ChessboardActivity : AppCompatActivity() {
     }
 
 
-    fun setWhitePositions() {
+    private fun setWhitePositions() {
 
-        val layout = findViewById<ConstraintLayout>(R.id.piecesLayout)
-
-        var temp = piecesSymbols.toMutableList()
+        val temp = piecesSymbols.toMutableList()
 
         for (piece in game.board.pieces) {
-            for (i in 0..pieces.size - 1) {
+            for (i in 0..<pieces.size) {
                 if (piece.getSymbol() == piecesSymbols[i]) {
                     pieces[i].x = squareSize * (piece.coordinates.file)
                     pieces[i].y = squareSize * (7 - piece.coordinates.row)
@@ -128,7 +127,7 @@ class ChessboardActivity : AppCompatActivity() {
     }
 
 
-    fun readSettingsJson () : String {
+    private fun readSettingsJson () : String {
         var string: String? = ""
         val stringBuilder = StringBuilder()
         val inputStream: InputStream = resources.openRawResource(applicationContext.resources.getIdentifier("settings", "raw", applicationContext.packageName))
