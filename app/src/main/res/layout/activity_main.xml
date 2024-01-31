@@ -28,7 +28,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.481"
-        app:srcCompat="@drawable/black_king" />
+        app:srcCompat="@drawable/black_king"
+        android:contentDescription="@string/todo" />
 
     <Button
         android:id="@+id/score_button"
