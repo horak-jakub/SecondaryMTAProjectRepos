@@ -1,9 +1,8 @@
-package com.example.chess_endgame
+package com.example.chess_endgame.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.ImageView
 import com.example.chess_endgame.databinding.ActivityMainBinding
 
 
@@ -15,16 +14,13 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        //val img = findViewById<ImageView>(R.id.imageView2)
-        //img.setImageResource(R.drawable.chess_kdt45)
-
         binding.newGameButton.setOnClickListener {
             startActivity(Intent(this, BoardSettingActivity::class.java))
         }
 
-        //binding.newGameButton.setOnClickListener {
-        //    startActivity(Intent(this, ScoreActivity::class.java))
-        //}
+        binding.scoreButton.setOnClickListener {
+            startActivity(Intent(this, ScoreActivity::class.java))
+        }
     }
 
 

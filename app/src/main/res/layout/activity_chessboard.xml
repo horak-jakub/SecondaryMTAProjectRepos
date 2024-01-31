@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
-    tools:context=".ChessboardActivity">
+    tools:context=".activities.ChessboardActivity">
 
     <androidx.gridlayout.widget.GridLayout
         android:layout_width="400dp"
@@ -371,21 +371,30 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintHorizontal_bias="0.272"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.29" />
+            app:layout_constraintVertical_bias="0.03" />
 
         <Button
-            android:id="@+id/new_gam_button"
-            android:layout_width="122dp"
-            android:layout_height="67dp"
-            android:text="Show Score"
+            android:id="@+id/records_button"
+            android:layout_width="125dp"
+            android:layout_height="44dp"
+            android:text="Records"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.372"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.702" />
+            app:layout_constraintVertical_bias="0.392" />
+
+        <Button
+            android:id="@+id/new_game_button"
+            android:layout_width="125dp"
+            android:layout_height="44dp"
+            android:text="New Game"
+            tools:layout_editor_absoluteX="16dp"
+            tools:layout_editor_absoluteY="100dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -1,4 +1,4 @@
-package com.example.chess_endgame.Background
+package com.example.chess_endgame.background
 
 const val maximum = 10000
 var depth = 0

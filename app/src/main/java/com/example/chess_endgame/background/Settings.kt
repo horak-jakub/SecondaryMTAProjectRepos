@@ -1,4 +1,4 @@
-package com.example.chess_endgame.Background
+package com.example.chess_endgame.background
 
 import android.util.Log
 import org.json.JSONArray

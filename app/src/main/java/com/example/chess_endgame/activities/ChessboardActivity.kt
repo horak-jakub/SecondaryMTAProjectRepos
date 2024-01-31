@@ -1,4 +1,4 @@
-package com.example.chess_endgame
+package com.example.chess_endgame.activities
 
 import android.content.Intent
 import android.content.res.Resources
@@ -9,8 +9,9 @@ import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
 import com.example.chess.console.Game
-import com.example.chess_endgame.Background.Coordinates
-import com.example.chess_endgame.Main.GameFactory
+import com.example.chess_endgame.background.Coordinates
+import com.example.chess_endgame.main.GameFactory
+import com.example.chess_endgame.R
 import com.example.chess_endgame.Score.ScoreDatabase
 import com.example.chess_endgame.databinding.ActivityChessboardBinding
 import java.io.BufferedReader
@@ -42,9 +43,16 @@ class ChessboardActivity : AppCompatActivity() {
         val factory = GameFactory(readSettingsJson(), scoreDao)
         game = ViewModelProvider(this, factory).get(Game::class.java)
 
-        binding.newGamButton.setOnClickListener() {
+        binding.recordsButton.setOnClickListener() {
+            finish()
             startActivity(Intent(this, ScoreActivity::class.java))
         }
+
+        binding.newGameButton.setOnClickListener() {
+            finish()
+            startActivity(Intent(this, BoardSettingActivity::class.java))
+        }
+
         binding.mateLayout.x = -1000f
 
         val layout = findViewById<ConstraintLayout>(R.id.piecesLayout)

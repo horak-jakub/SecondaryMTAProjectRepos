@@ -1,4 +1,4 @@
-package com.example.chess_endgame.Main
+package com.example.chess_endgame.main
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

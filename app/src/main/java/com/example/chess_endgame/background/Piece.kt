@@ -1,4 +1,4 @@
-package com.example.chess_endgame.Background
+package com.example.chess_endgame.background
 
 import com.example.chess_endgame.R
 import kotlin.math.abs

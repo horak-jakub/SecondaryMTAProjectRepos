@@ -1,15 +1,10 @@
-package com.example.chess_endgame
+package com.example.chess_endgame.activities
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.chess.console.Game
-import com.example.chess_endgame.Score.ScoreAdapter
 import com.example.chess_endgame.databinding.ActivityBoardSettingBinding
-import java.io.BufferedReader
-import java.io.IOException
-import java.io.InputStream
-import java.io.InputStreamReader
 
 
 class BoardSettingActivity : AppCompatActivity() {
@@ -52,6 +47,10 @@ class BoardSettingActivity : AppCompatActivity() {
         binding.QBGameButton.setOnClickListener {
             Game.createQBChessboard()
             startActivity(Intent(this, ChessboardActivity::class.java))
+        }
+
+        binding.backButton.setOnClickListener {
+            finish()
         }
 
     }

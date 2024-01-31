@@ -1,4 +1,4 @@
-package com.example.chess_endgame.Background
+package com.example.chess_endgame.background
 
 
 private const val emptySquare : Char = '.'
