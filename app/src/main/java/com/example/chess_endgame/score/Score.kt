@@ -1,4 +1,4 @@
-package com.example.chess_endgame.Score
+package com.example.chess_endgame.score
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

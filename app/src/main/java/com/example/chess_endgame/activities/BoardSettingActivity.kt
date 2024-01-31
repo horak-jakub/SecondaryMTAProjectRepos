@@ -3,7 +3,7 @@ package com.example.chess_endgame.activities
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import com.example.chess.console.Game
+import com.example.chess_endgame.main.Game
 import com.example.chess_endgame.databinding.ActivityBoardSettingBinding
 
 

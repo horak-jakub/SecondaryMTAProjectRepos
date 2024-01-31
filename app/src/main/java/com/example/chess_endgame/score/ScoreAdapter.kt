@@ -1,4 +1,4 @@
-package com.example.chess_endgame.Score
+package com.example.chess_endgame.score
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.chess_endgame.databinding.ScoreRowBinding
 
-class ScoreAdapter() : ListAdapter<Score, ScoreAdapter.ScoreViewHolder>(DiffCallback) {
+class ScoreAdapter : ListAdapter<Score, ScoreAdapter.ScoreViewHolder>(DiffCallback) {
 
     companion object {
         private val DiffCallback = object : DiffUtil.ItemCallback<Score>() {
@@ -23,14 +23,13 @@ class ScoreAdapter() : ListAdapter<Score, ScoreAdapter.ScoreViewHolder>(DiffCall
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ScoreViewHolder {
-        val viewHolder = ScoreViewHolder(
+        return ScoreViewHolder(
             ScoreRowBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false
             )
         )
-        return viewHolder
     }
 
     override fun onBindViewHolder(holder: ScoreViewHolder, position: Int) {

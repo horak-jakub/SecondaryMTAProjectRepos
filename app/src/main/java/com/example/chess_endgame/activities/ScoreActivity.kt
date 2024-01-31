@@ -5,8 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.lifecycle.coroutineScope
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.chess_endgame.Score.ScoreAdapter
-import com.example.chess_endgame.Score.ScoreDatabase
+import com.example.chess_endgame.score.ScoreAdapter
+import com.example.chess_endgame.score.ScoreDatabase
 import com.example.chess_endgame.databinding.ActivityScoreBinding
 import kotlinx.coroutines.launch
 

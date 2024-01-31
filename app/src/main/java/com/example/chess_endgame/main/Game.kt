@@ -1,9 +1,10 @@
-package com.example.chess.console
+package com.example.chess_endgame.main
 
 import androidx.lifecycle.ViewModel
 import com.example.chess_endgame.background.*
-import com.example.chess_endgame.Score.Score
-import com.example.chess_endgame.Score.ScoreDao
+import com.example.chess_endgame.score.Score
+import com.example.chess_endgame.score.ScoreDao
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.JSONArray
@@ -15,6 +16,7 @@ fun main() {
 }
 
 class Game(jsonSettings : String, scoreDao: ScoreDao) : ViewModel() {
+
 
     companion object {
         private var gameId : String = ""
@@ -52,8 +54,9 @@ class Game(jsonSettings : String, scoreDao: ScoreDao) : ViewModel() {
     private var b = true
     private var settings : Settings
     var board : Chessboard
-    val scoreDao : ScoreDao
-    var moveCount = 0
+    private val scoreDao : ScoreDao
+    private var moveCount = 0
+    var finished = false
 
     init {
         board = Chessboard()
@@ -68,7 +71,7 @@ class Game(jsonSettings : String, scoreDao: ScoreDao) : ViewModel() {
         //board.placePiece(Bishop(true, Coordinates('d', '7')))
         //board.placePiece(Bishop(true, Coordinates('e', '1')))
 
-        var command = ""
+        var command: String
         do {
             if (b) {
                 board = comp.minMax(board).first
@@ -84,14 +87,14 @@ class Game(jsonSettings : String, scoreDao: ScoreDao) : ViewModel() {
         } while (true)
     }
 
-    fun readCommand(): String {
+    private fun readCommand(): String {
         print("Zadej příkaz: ")
-        return readLine().toString()
+        return readlnOrNull().toString()
     }
 
-    fun runCommand(command : String) : Boolean {
+    private fun runCommand(command : String) : Boolean {
         //board = board.movePiece(Coordinates(command.get(0), command.get(1)), Coordinates(command.get(2), command.get(3)))
-        val b = board.movePiece(board.blackKing, Coordinates(command.get(0), command.get(1)))
+        val b = board.movePiece(board.blackKing, Coordinates(command[0], command[1]))
         if (board != b) {
             board = b
             println(board)
@@ -109,8 +112,9 @@ class Game(jsonSettings : String, scoreDao: ScoreDao) : ViewModel() {
         return false
     }
 
+    @OptIn(DelicateCoroutinesApi::class)
     fun computeMove() : Boolean {
-        var p = comp.minMax(board)
+        val p = comp.minMax(board)
         moveCount++
         board = p.first
         println(p.second)
@@ -118,6 +122,7 @@ class Game(jsonSettings : String, scoreDao: ScoreDao) : ViewModel() {
 
         if (board.generateMoves().size == 0) {
             GlobalScope.launch {
+                finished = true
                 scoreDao.addScore(Score(0, Date(), board.toString(), moveCount))
             }
             return false
@@ -125,8 +130,8 @@ class Game(jsonSettings : String, scoreDao: ScoreDao) : ViewModel() {
         return true
     }
 
-    fun generatePieces(pieces: JSONArray?) {
-        var piece : Piece
+    private fun generatePieces(pieces: JSONArray?) {
+
         pieces?.let {
             for (i in 0 until pieces.length()) {
                 val piece = pieces.getJSONObject(i)

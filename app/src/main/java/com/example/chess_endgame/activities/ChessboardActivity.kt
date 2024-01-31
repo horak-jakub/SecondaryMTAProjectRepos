@@ -9,11 +9,11 @@ import android.view.MotionEvent
 import android.widget.ImageView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.lifecycle.ViewModelProvider
-import com.example.chess.console.Game
+import com.example.chess_endgame.main.Game
 import com.example.chess_endgame.background.Coordinates
 import com.example.chess_endgame.main.GameFactory
 import com.example.chess_endgame.R
-import com.example.chess_endgame.Score.ScoreDatabase
+import com.example.chess_endgame.score.ScoreDatabase
 import com.example.chess_endgame.databinding.ActivityChessboardBinding
 import java.io.BufferedReader
 import java.io.IOException
@@ -55,7 +55,9 @@ class ChessboardActivity : AppCompatActivity() {
             startActivity(Intent(this, BoardSettingActivity::class.java))
         }
 
-        binding.mateLayout.x = -1000f
+        if (!game.finished) {
+            binding.mateLayout.x = -1000f
+        }
 
         val layout = findViewById<ConstraintLayout>(R.id.piecesLayout)
         blackKing = ImageView(this)
