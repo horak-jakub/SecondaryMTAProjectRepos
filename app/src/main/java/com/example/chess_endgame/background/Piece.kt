@@ -26,7 +26,7 @@ abstract class Piece {
 
 
     fun canYouMove(file : Int, row : Int) : Boolean {
-        var list = getMovementList()
+        val list = getMovementList()
         for(m in list) {
             if (!movementIsRepeatable()) {
                 if (m.first == file && m.second == row) return true
@@ -47,17 +47,14 @@ class King : Piece {
 
     var moved : Boolean = false
 
-
     companion object {
         var movementList = listOf( Pair(1, 1), Pair(1, 0), Pair(1, -1), Pair(0, 1), Pair(0, -1), Pair(-1, 1), Pair(-1, 0), Pair(-1, -1) )
         var representation = R.drawable.white_king
     }
 
-    constructor(white: Boolean, file: Int, row: Int) : super(white, file, row) {
-    }
+    constructor(white: Boolean, file: Int, row: Int) : super(white, file, row)
 
-    constructor(white: Boolean, coord : Coordinates) : super(white, coord) {
-    }
+    constructor(white: Boolean, coord : Coordinates) : super(white, coord)
 
     override fun getSymbol(): Char {
         if (white) {
@@ -90,11 +87,9 @@ class Queen : Piece {
         var representation = R.drawable.white_queen
     }
 
-    constructor(white: Boolean, file: Int, row: Int) : super(white, file, row) {
-    }
+    constructor(white: Boolean, file: Int, row: Int) : super(white, file, row)
 
-    constructor(white: Boolean, coord : Coordinates) : super(white, coord) {
-    }
+    constructor(white: Boolean, coord : Coordinates) : super(white, coord)
 
     override fun getSymbol(): Char {
         if (white) {
@@ -127,11 +122,9 @@ class Rook : Piece {
         var representation = R.drawable.white_rook
     }
 
-    constructor(white: Boolean, file: Int, row: Int) : super(white, file, row) {
-    }
+    constructor(white: Boolean, file: Int, row: Int) : super(white, file, row)
 
-    constructor(white: Boolean, coord : Coordinates) : super(white, coord) {
-    }
+    constructor(white: Boolean, coord : Coordinates) : super(white, coord)
 
     override fun getSymbol(): Char {
         if (white) {
@@ -164,11 +157,9 @@ class Bishop : Piece {
         var representation = R.drawable.white_bishop
     }
 
-    constructor(white: Boolean, coord : Coordinates) : super(white, coord) {
-    }
+    constructor(white: Boolean, coord : Coordinates) : super(white, coord)
 
-    constructor(white: Boolean, file: Int, row: Int) : super(white, file, row) {
-    }
+    constructor(white: Boolean, file: Int, row: Int) : super(white, file, row)
 
     override fun getSymbol(): Char {
         if (white) {
@@ -200,11 +191,9 @@ class Knight : Piece {
         var representation = R.drawable.white_knight
     }
 
-    constructor(white: Boolean, file: Int, row: Int) : super(white, file, row) {
-    }
+    constructor(white: Boolean, file: Int, row: Int) : super(white, file, row)
 
-    constructor(white: Boolean, coord : Coordinates) : super(white, coord) {
-    }
+    constructor(white: Boolean, coord : Coordinates) : super(white, coord)
 
     override fun getSymbol(): Char {
         if (white) {

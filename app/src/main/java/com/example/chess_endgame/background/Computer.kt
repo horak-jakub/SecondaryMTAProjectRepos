@@ -2,12 +2,12 @@ package com.example.chess_endgame.background
 
 const val maximum = 10000
 var depth = 0
-val baseDepth = 5
-val kingPosEval = listOf<Int>(100, 95, 85, 70, 95, 80, 60, 40, 85, 60, 10, 0, 70, 40, 0, -20)
+const val baseDepth = 5
+val kingPosEval = listOf(100, 95, 85, 70, 95, 80, 60, 40, 85, 60, 10, 0, 70, 40, 0, -20)
 
 class Computer {
 
-    var repeatedMoves = mutableListOf<Array<Char>>()
+    private val repeatedMoves = mutableListOf<Array<Char>>()
 
     fun minMax(board : Chessboard) : Pair<Chessboard, Int> {
         depth = baseDepth
@@ -18,13 +18,13 @@ class Computer {
             }
         }
         //if (evaluatePosition(board) > 80) depth += 1
-        var finalBoard : Chessboard = Chessboard()
+        var finalBoard = Chessboard()
 
         var max = -maximum
         var j : Long = 0
 
         for (it in board.generateMoves()) {
-            var pair = minMax(it, 1, max)
+            val pair = minMax(it, 1, max)
             j += pair.second
             if (pair.first > max) {
                 var b = true
@@ -45,7 +45,7 @@ class Computer {
     }
 
     //Pair<level, iterations>
-    fun minMax(board : Chessboard, i : Int, knownBest : Int) : Pair<Int, Long> {
+    private fun minMax(board : Chessboard, i : Int, knownBest : Int) : Pair<Int, Long> {
 
         //iterations counter
         var j : Long = 0
@@ -55,7 +55,7 @@ class Computer {
             if (board.whiteOnTurn) {
                 val moves = board.generateMoves()
                 for (m in moves) {
-                    var pair = minMax(m,i + 1, max)
+                    val pair = minMax(m,i + 1, max)
                     j += pair.second
 
                     if (pair.first > max) {
@@ -70,14 +70,14 @@ class Computer {
             else {
                 var min = maximum
                 val moves = board.generateMoves()
-                if (moves.count() == 0) {
+                if (moves.isEmpty()) {
                     //Check mate
-                    if (board.whiteControl[board.blackKing.coordinates.index]) {
-                        return Pair(maximum - i, 1)
+                    return if (board.whiteControl[board.blackKing.coordinates.index]) {
+                        Pair(maximum - i, 1)
                     }
                     //Stalemate
                     else {
-                        return Pair(-maximum, 1)
+                        Pair(-maximum, 1)
                     }
                 }
                 for (m in moves) {
@@ -86,7 +86,7 @@ class Computer {
                             return Pair(-maximum, 1)
                         }
                     }
-                    var pair = minMax(m, i + 1, min)
+                    val pair = minMax(m, i + 1, min)
                     j += pair.second
 
                     if (pair.first < min) {
@@ -106,17 +106,17 @@ class Computer {
         fun evaluatePosition(board : Chessboard) : Int {
 
             var whiteKingCoord = Coordinates(0,0)
-            board.pieces.forEach() {
+            board.pieces.forEach {
                 if (it is King) whiteKingCoord = it.coordinates
             }
             var a = (whiteKingCoord.getDistance(board.blackKing.coordinates) - 1) * 2
-            a = -a * a
+            a *= -a
             a += getKingPosEvaluation(board.blackKing)
 
             return a
         }
 
-        fun getKingPosEvaluation(king : King) : Int {
+        private fun getKingPosEvaluation(king : King) : Int {
             var file = king.coordinates.file
             var row = king.coordinates.row
             if (file >= Coordinates.count / 2) file = Coordinates.count - 1 - file

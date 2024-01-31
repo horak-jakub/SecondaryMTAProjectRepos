@@ -6,17 +6,15 @@ private const val emptySquare : Char = '.'
 
 class Chessboard {
 
-    var board = Array<Char>(64) { emptySquare }
-    val whiteControl = Array<Boolean>(64) { false }
+    var board = Array(64) { emptySquare }
+    val whiteControl = Array(64) { false }
     var pieces = mutableListOf<Piece>()
     var blackKing = King(false, Coordinates(0, 7))
-    var whiteOnTurn : Boolean = false
+    var whiteOnTurn = false
 
-    constructor() {
-    }
 
-    constructor(parentBoard : Chessboard, originalPiece : Piece, movedPiece : Piece) {
-        whiteOnTurn = !parentBoard.whiteOnTurn
+    constructor(parentBoard: Chessboard?, originalPiece: Piece, movedPiece: Piece) {
+        whiteOnTurn = !parentBoard?.whiteOnTurn!!
         board = parentBoard.board.copyOf()
         pieces = parentBoard.pieces.toMutableList()
         blackKing = parentBoard.blackKing
@@ -27,13 +25,12 @@ class Chessboard {
             pieces.remove(originalPiece)
             pieces.add((movedPiece))
         }
-
         board[originalPiece.coordinates.index] = emptySquare
         board[movedPiece.coordinates.index] = movedPiece.getSymbol()
-
         generateWhiteControl()
     }
 
+    constructor()
 
     fun placePiece(piece : Piece) {
         board[piece.coordinates.index] = piece.getSymbol()
@@ -58,7 +55,7 @@ class Chessboard {
     fun movePiece(oldCoord : Coordinates, newCoord : Coordinates) : Chessboard {
         if (!newCoord.valid()) throw Exception("Invalid coordinates")
         var oldPiece : Piece = King(true, 0, 0)
-        var b : Boolean = false
+        var b = false
 
         if (blackKing.coordinates.equals(oldCoord)) {
             oldPiece = blackKing
@@ -74,21 +71,20 @@ class Chessboard {
         if (!b || !oldPiece.canYouMove(newCoord.file - oldCoord.file, newCoord.row - oldCoord.row) || whiteControl[newCoord.index]) {
             return this
         }
-        var newPiece = oldPiece.getNewPiece(newCoord)
+
         return Chessboard(this, oldPiece, oldPiece.getNewPiece(newCoord))
     }
 
     override fun toString(): String {
 
-        var s : String = ""
+        var s  = ""
 
         for (i in Coordinates.count - 1 downTo 0) {
             for (j in 0..<Coordinates.count) {
-                if (board[i * Coordinates.count + j] == '.') {
-                    s += board[i * Coordinates.count + j] + "   "
-                }
-                else {
-                    s += board[i * Coordinates.count + j] + "  "
+                s += if (board[i * Coordinates.count + j] == '.') {
+                    board[i * Coordinates.count + j] + "   "
+                } else {
+                    board[i * Coordinates.count + j] + "  "
                 }
 
             }
@@ -100,7 +96,7 @@ class Chessboard {
 
     fun generateMoves() : MutableList<Chessboard> {
 
-        var list = mutableListOf<Chessboard>()
+        val list = mutableListOf<Chessboard>()
 
         val tempPieces = pieces.toMutableList()
         if (whiteOnTurn) {
@@ -121,10 +117,10 @@ class Chessboard {
         return list
     }
 
-    fun generateWhiteControl() {
+    private fun generateWhiteControl() {
 
         for (p in pieces) {
-            p.getMovementList().forEach() {
+            p.getMovementList().forEach {
                 var file = p.coordinates.file + it.first
                 var row = p.coordinates.row + it.second
 
@@ -146,10 +142,10 @@ class Chessboard {
         }
     }
 
-    fun generatePieceMoves(p : Piece) : MutableList<Chessboard> {
+    private fun generatePieceMoves(p : Piece) : MutableList<Chessboard> {
 
-        var list = mutableListOf<Chessboard>()
-        var kingList = mutableListOf<Chessboard>()
+        val list = mutableListOf<Chessboard>()
+        val kingList = mutableListOf<Chessboard>()
 
         for (it in p.getMovementList()) {
             var file = p.coordinates.file + it.first
