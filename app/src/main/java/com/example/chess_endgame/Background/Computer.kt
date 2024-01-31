@@ -11,7 +11,7 @@ class Computer {
 
     fun minMax(board : Chessboard) : Pair<Chessboard, Int> {
         depth = baseDepth
-        if (evaluatePosition(board) > 60) depth += 2
+        if (evaluatePosition(board) > 60) depth += 1
         //if (evaluatePosition(board) > 80) depth += 1
         var finalBoard : Chessboard = Chessboard()
 
